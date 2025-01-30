@@ -1,7 +1,7 @@
 return {
   {
-    -- 'hrsh7th/nvim-deck',
-    dir = '~/go/src/github.com.devoc09/devoc09/nvim-deck',
+    'hrsh7th/nvim-deck',
+    -- dir = '~/go/src/github.com.devoc09/devoc09/nvim-deck',
     config = function ()
       local deck = require('deck')
       require('deck.easy').setup()

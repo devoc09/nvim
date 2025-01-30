@@ -1,6 +1,6 @@
 return {
-    -- "devoc09/lflops.nvim",
-    dir = '~/go/src/github.com.devoc09/devoc09/lflops.nvim',
+    "devoc09/lflops.nvim",
+    -- dir = '~/go/src/github.com.devoc09/devoc09/lflops.nvim',
     config = function()
       require('lflops').setup({
         italic = {
