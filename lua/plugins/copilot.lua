@@ -17,6 +17,7 @@ return {
       yaml = true,
       markdown = true,
       json = true,
+      help = false,
     },
   },
   enabled = true,

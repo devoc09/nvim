@@ -17,7 +17,7 @@ return {
     { "nvim-lua/plenary.nvim", branch = "master" },
   },
   opts = {
-    model = 'claude-3.5-sonnet',
+    model = 'o3-mini',
   },
   enabled = true,
 }
