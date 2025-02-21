@@ -11,7 +11,7 @@ return {
       local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
       -- Mappings.
-      local opts = {noremap = true, silent = true}
+      local opts = { noremap = true, silent = true }
       buf_set_keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
       buf_set_keymap("n", "gD", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
       buf_set_keymap("n", "gh", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
@@ -104,22 +104,21 @@ return {
     }
 
     -- format on save
-    vim.api.nvim_create_autocmd({'BufWritePre'}, {
-      pattern = {"*.py", "*.zig"},
-      callback = function() vim.lsp.buf.format({ timeout=1500, async=false }) end,
+    vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
+      pattern = { "*.py", "*.zig", "*.go" },
+      callback = function() vim.lsp.buf.format({ timeout = 1500, async = false }) end,
     })
 
     -- imports & format on save
-    vim.api.nvim_create_autocmd({'BufWritePre'}, {
-      pattern = {"*.go"},
-      callback = function(args)
-        vim.lsp.buf.code_action({
-          context={only={ 'source.organizeImports' }},
-          apply = true
-        })
-        vim.lsp.buf.format({ timeout=1500, async=false })
-      end,
-    })
-
+    -- vim.api.nvim_create_autocmd({'BufWritePre'}, {
+    --   pattern = {"*.go"},
+    --   callback = function(args)
+    --     vim.lsp.buf.code_action({
+    --       context={only={ 'source.organizeImports' }},
+    --       apply = true
+    --     })
+    --     vim.lsp.buf.format({ timeout=1500, async=false })
+    --   end,
+    -- })
   end,
 }
