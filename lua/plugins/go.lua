@@ -22,6 +22,6 @@ return {
     config = function()
       require('go').setup()
     end,
-    enabled = true,
+    enabled = false,
   },
 }
