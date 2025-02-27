@@ -14,14 +14,14 @@ return {
     ft = "go",
     enabled = false,
   },
-  {
-    'ray-x/go.nvim',
-    ft = { "go", "gomod" },
-    event = { "CmdlineEnter" },
-    build = ':lua require("go.install").update_all_sync()',
-    config = function()
-      require('go').setup()
-    end,
-    enabled = false,
-  },
+  -- {
+  --   'ray-x/go.nvim',
+  --   ft = { "go", "gomod" },
+  --   event = { "CmdlineEnter" },
+  --   build = ':lua require("go.install").update_all_sync()',
+  --   config = function()
+  --     require('go').setup()
+  --   end,
+  --   enabled = false,
+  -- },
 }
