@@ -13,7 +13,5 @@ return {
       },
     })
     vim.cmd("colorscheme lflops")
-    vim.o.background = "dark"
-    vim.o.termguicolors = true
   end,
 }

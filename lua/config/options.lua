@@ -36,7 +36,6 @@ vim.o.colorcolumn = "100" -- Highlight 100 character limit
 
 -- colorscheme
 vim.opt.background = "dark"
-vim.o.termguicolors = true
 
 -- cursorline highlight
 vim.o.cursorline = true

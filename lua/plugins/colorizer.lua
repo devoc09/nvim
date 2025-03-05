@@ -4,5 +4,5 @@ return {
     vim.opt.termguicolors = true
     require("colorizer").setup()
   end,
-  enabled = true,
+  enabled = false,
 }
