@@ -4,7 +4,7 @@ vim.o.fileencoding = "utf-8"
 vim.o.mouse = "a"
 vim.o.foldenable = false
 vim.o.wildmenu = true
-vim.o.completeopt = "menu,menuone,noinsert,noselect"
+vim.o.completeopt = "menu,menuone,noinsert,noselect,popup"
 vim.o.number = false
 -- vim.o.clipboard = 'unnamed'
 vim.o.belloff = 'all'
@@ -42,6 +42,7 @@ vim.o.cursorline = true
 
 -- buffer
 vim.o.autoread = true
+vim.o.winborder = 'rounded'
 
 -- session
 vim.o.sessionoptions = 'buffers,curdir,folds,help,tabpages,winsize,terminal,options,globals'

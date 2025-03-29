@@ -9,17 +9,9 @@ return {
       'dcampos/nvim-snippy',
     },
     config = function()
-      -- local has_words_before = function()
-      --   unpack = unpack or table.unpack
-      --   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-      --   return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-      -- end
       local cmp = require('cmp')
       local snippy = require('snippy')
       local opts = {
-        preselect = {
-          none = true,
-        },
         sources = cmp.config.sources {
           { name = 'nvim_lsp' },
           { name = 'buffer' },
@@ -27,17 +19,6 @@ return {
           { name = 'snippy' },
         },
         mapping = cmp.mapping.preset.insert({
-          ['<C-k>'] = cmp.mapping(function(original)
-            if cmp.visible() then
-              if snippy.can_expand() then
-                snippy.expand()
-              else
-                cmp.confirm({ select = true })
-              end
-            else
-              original()
-            end
-          end),
           ['<C-n>'] = cmp.mapping(function(original)
             if snippy.can_jump(1) then
               snippy.next()
@@ -46,7 +27,7 @@ return {
             else
               original()
             end
-          end, {'i', 's'}),
+          end, { 'i', 's' }),
           ['<C-p>'] = cmp.mapping(function(original)
             if snippy.can_jump(-1) then
               snippy.previous()
@@ -55,7 +36,7 @@ return {
             else
               original()
             end
-          end, {'i', 's'}),
+          end, { 'i', 's' }),
         }),
         snippet = {
           expand = function(args)
@@ -70,8 +51,8 @@ return {
       cmp.setup(opts)
     end,
   },
-  {"hrsh7th/cmp-nvim-lsp", lazy = true },
-  {"hrsh7th/cmp-path", lazy = true },
-  {"hrsh7th/cmp-buffer", lazy = true },
-  {'dcampos/cmp-snippy', lazy = true },
+  { "hrsh7th/cmp-nvim-lsp", lazy = true },
+  { "hrsh7th/cmp-path",     lazy = true },
+  { "hrsh7th/cmp-buffer",   lazy = true },
+  { 'dcampos/cmp-snippy',   lazy = true },
 }
