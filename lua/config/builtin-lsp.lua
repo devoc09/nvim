@@ -57,7 +57,25 @@ vim.lsp.config['lua_ls'] = {
   }
 }
 
-vim.lsp.enable({ 'gopls', 'lua_ls' })
+vim.lsp.config['ts_ls'] = {
+  cmd = { 'typescript-language-server', '--stdio' },
+  root_markers = {
+    'tsconfig.json',
+    'jsconfig.json',
+    'package.json',
+    '.git'
+  },
+  filetypes = {
+    'javascript',
+    'javascriptreact',
+    'javascript.jsx',
+    'typescript',
+    'typescriptreact',
+    'typescript.tsx',
+  },
+}
+
+vim.lsp.enable({ 'gopls', 'lua_ls', 'ts_ls' })
 
 -- Keymaps of LSP
 vim.api.nvim_create_autocmd('LspAttach', {

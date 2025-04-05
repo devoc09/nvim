@@ -29,10 +29,7 @@ vim.o.splitright = true
 
 -- statusline & tabline
 vim.o.showtabline = 1
--- vim.o.tabline='%t'
 vim.o.laststatus = 3
-
-vim.o.colorcolumn = "100" -- Highlight 100 character limit
 
 -- colorscheme
 vim.opt.background = "dark"
