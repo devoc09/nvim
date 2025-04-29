@@ -12,6 +12,10 @@ return {
       local cmp = require('cmp')
       local snippy = require('snippy')
       local opts = {
+        preselect = 'item',
+        completion = {
+          completeopt = 'menu,menuone,noinsert',
+        },
         sources = cmp.config.sources {
           { name = 'nvim_lsp' },
           { name = 'buffer' },

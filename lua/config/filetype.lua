@@ -1,5 +1,5 @@
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "go", "python" },
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { 'go', 'python', 'zig' },
   callback = function()
     vim.opt_local.autoindent = true
     vim.opt_local.smartindent = true
@@ -10,8 +10,8 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "vim", "lua", "bash", "fish" },
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { 'c', 'vim', 'lua', 'bash', 'fish' },
   callback = function()
     vim.opt_local.autoindent = true
     vim.opt_local.smartindent = true
@@ -22,13 +22,13 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
-vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
-  pattern = { "*.yaml.j2" },
-  command = "set filetype=yaml",
+vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
+  pattern = { '*.yaml.j2' },
+  command = 'set filetype=yaml',
 })
 
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "javascript", "typescript", "typescriptreact", "javascriptreact", "typescript.tsx", "javascript.jsx" },
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { 'javascript', 'typescript', 'typescriptreact', 'javascriptreact', 'typescript.tsx', 'javascript.jsx' },
   callback = function()
     vim.opt_local.autoindent = true
     vim.opt_local.smartindent = true

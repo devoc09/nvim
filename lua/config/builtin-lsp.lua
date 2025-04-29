@@ -106,14 +106,14 @@ vim.api.nvim_create_autocmd('LspAttach', {
     if client:supports_method('textDocument/codeAction') then
       vim.keymap.set('n', '<Leader>k', vim.lsp.buf.code_action, keyopts)
     end
-    if client:supports_method('textDocument/signatureHelp') then
-      vim.api.nvim_create_autocmd('CursorHoldI', {
-        pattern = '*',
-        callback = function()
-          vim.lsp.buf.signature_help({ focus = false, silent = true })
-        end
-      })
-    end
+    -- if client:supports_method('textDocument/signatureHelp') then
+    --   vim.api.nvim_create_autocmd('CursorHoldI', {
+    --     pattern = '*',
+    --     callback = function()
+    --       vim.lsp.buf.signature_help({ focus = false, silent = true })
+    --     end
+    --   })
+    -- end
   end,
 })
 
