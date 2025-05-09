@@ -1,7 +1,9 @@
 -- Split window
 vim.api.nvim_set_keymap("n", "ss", ":split<Return><C-w>w", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "sv", ":vsplit<Return>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "st", ":tabnew<Return>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "st",
+  ":let relpath = fnamemodify(expand('%:p'), ':.') | execute 'tabnew ' . relpath<Return>",
+  { noremap = true, silent = true })
 
 -- Remap keys
 vim.api.nvim_set_keymap("n", "<S-h>", "^", { noremap = true })
@@ -53,17 +55,17 @@ vim.cmd([[
 
 -- Clear all buffers
 function clearBuffers()
-    local buffers = vim.api.nvim_list_bufs()
+  local buffers = vim.api.nvim_list_bufs()
 
-    for _, buffer in ipairs(buffers) do
-        if vim.api.nvim_buf_get_option(buffer, "modified") then
-            print("Buffer " .. buffer .. "has unsaved changes")
-        else
-            vim.api.nvim_buf_delete(buffer, { force = true })
-        end
+  for _, buffer in ipairs(buffers) do
+    if vim.api.nvim_buf_get_option(buffer, "modified") then
+      print("Buffer " .. buffer .. "has unsaved changes")
+    else
+      vim.api.nvim_buf_delete(buffer, { force = true })
     end
+  end
 end
+
 vim.api.nvim_set_keymap("n", "<Leader>cl", ":lua clearBuffers()<cr>", { noremap = true, silent = true })
 -- copy current buffer filepath to clipboard
 vim.api.nvim_set_keymap('n', ';c', ':let @+=expand("%:p")<CR>', { noremap = true, silent = true })
-
