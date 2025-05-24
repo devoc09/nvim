@@ -2,6 +2,7 @@ return {
   'CopilotC-Nvim/CopilotChat.nvim',
   cmd = {
     'CopilotChat',
+    'CopilotChatModels',
     'CopilotChatExplain',
     'CopilotChatReview',
     'CopilotChatFix',
@@ -17,7 +18,7 @@ return {
     { "nvim-lua/plenary.nvim", branch = "master" },
   },
   opts = {
-    model = 'claude-3.7-sonnet',
+    model = 'claude-sonnet-4',
   },
   enabled = true,
 }
