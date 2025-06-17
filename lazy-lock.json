@@ -12,7 +12,6 @@
   "lflops.nvim": { "branch": "main", "commit": "cfb40e3253169b421b3d75274535b10994272e3d" },
   "nvim-cmp": { "branch": "main", "commit": "b5311ab3ed9c846b585c0c15b7559be131ec4be9" },
   "nvim-colorizer.lua": { "branch": "master", "commit": "a065833f35a3a7cc3ef137ac88b5381da2ba302e" },
-  "nvim-deck": { "branch": "main", "commit": "c9403cef32b9377faf9152b8de36859cbefcced4" },
   "nvim-snippy": { "branch": "master", "commit": "93c329f7dad98565ad5db9634ced253d665c1760" },
   "nvim-treesitter": { "branch": "master", "commit": "066fd6505377e3fd4aa219e61ce94c2b8bdb0b79" },
   "nvim-treesitter-endwise": { "branch": "master", "commit": "d6cbb83307d516ec076d17c9a33d704ef626ee8c" },

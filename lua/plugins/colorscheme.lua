@@ -2,7 +2,7 @@ return {
   "devoc09/lflops.nvim",
   -- dir = '~/go/src/github.com/devoc09/lflops.nvim',
   lazy = false,
-  config = function(plugin)
+  config = function()
     require('lflops').setup({
       italic = {
         strings = false,

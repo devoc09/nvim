@@ -20,5 +20,5 @@ return {
   opts = {
     model = 'claude-sonnet-4',
   },
-  enabled = true,
+  enabled = false,
 }
