@@ -94,7 +94,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     if client:supports_method('textDocument/definition') then
       vim.keymap.set('n', 'gd', vim.lsp.buf.definition, keyopts)
     end
-    if client:supports_method('textDocument/typeDefinition*') then
+    if client:supports_method('textDocument/typeDefinition') then
       vim.keymap.set('n', 'gt', vim.lsp.buf.type_definition, keyopts)
     end
     if client:supports_method('textDocument/references') then
