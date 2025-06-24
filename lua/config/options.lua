@@ -33,6 +33,9 @@ vim.o.laststatus = 3
 
 -- colorscheme
 vim.opt.background = "dark"
+if vim.env.TERM == 'xterm-ghostty' or vim.env.COLORTERM == 'truecolor' then
+  vim.opt.termguicolors = true
+end
 
 -- cursorline highlight
 vim.o.cursorline = true
