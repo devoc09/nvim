@@ -57,14 +57,27 @@ vim.lsp.config['lua_ls'] = {
   }
 }
 
-vim.lsp.config['ts_ls'] = {
-  cmd = { 'typescript-language-server', '--stdio' },
-  root_markers = {
-    'tsconfig.json',
-    'jsconfig.json',
-    'package.json',
-    '.git'
-  },
+-- vim.lsp.config['ts_ls'] = {
+--   cmd = { 'typescript-language-server', '--stdio' },
+--   root_markers = {
+--     'tsconfig.json',
+--     'jsconfig.json',
+--     'package.json',
+--     '.git'
+--   },
+--   filetypes = {
+--     'javascript',
+--     'javascriptreact',
+--     'javascript.jsx',
+--     'typescript',
+--     'typescriptreact',
+--     'typescript.tsx',
+--   },
+-- }
+
+vim.lsp.config['tsgo'] = {
+  cmd = { 'pnpm', 'exec', 'tsgo', '--lsp', '--stdio' },
+  root_markers = { 'package-lock.json', 'yarn.lock', 'pnpm-lock.yaml', 'bun.lockb', 'bun.lock', 'deno.lock', '.git' },
   filetypes = {
     'javascript',
     'javascriptreact',
@@ -86,7 +99,7 @@ vim.lsp.config['rust_analyzer'] = {
   },
 }
 
-vim.lsp.enable({ 'gopls', 'lua_ls', 'ts_ls', 'rust_analyzer' })
+vim.lsp.enable({ 'gopls', 'lua_ls', 'tsgo', 'rust_analyzer' })
 
 -- Keymaps of LSP
 vim.api.nvim_create_autocmd('LspAttach', {
