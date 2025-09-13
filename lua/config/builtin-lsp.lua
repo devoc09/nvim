@@ -75,7 +75,18 @@ vim.lsp.config['ts_ls'] = {
   },
 }
 
-vim.lsp.enable({ 'gopls', 'lua_ls', 'ts_ls' })
+vim.lsp.config['rust_analyzer'] = {
+  cmd = { 'rust-analyzer' },
+  root_markers = {
+    'cargo.toml',
+    '.git'
+  },
+  filetypes = {
+    'rust',
+  },
+}
+
+vim.lsp.enable({ 'gopls', 'lua_ls', 'ts_ls', 'rust_analyzer' })
 
 -- Keymaps of LSP
 vim.api.nvim_create_autocmd('LspAttach', {
