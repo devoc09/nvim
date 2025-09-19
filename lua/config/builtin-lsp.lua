@@ -173,7 +173,7 @@ vim.lsp.config['copilot'] = {
   end,
 }
 
-vim.lsp.enable({ 'gopls', 'lua_ls', 'tsgo', 'rust_analyzer', 'copilot' })
+vim.lsp.enable({ 'gopls', 'lua_ls', 'tsgo', 'rust_analyzer' })
 
 -- Keymaps of LSP
 vim.api.nvim_create_autocmd('LspAttach', {
