@@ -4,10 +4,16 @@ return {
   build = ":TSUpdate",
   dependencies = {
     { "RRethy/nvim-treesitter-endwise" },
+    { "nvim-treesitter/nvim-treesitter-context" },
   },
-  main = 'nvim-treesitter.configs',
+  branch = 'main',
   opts = {
+    auto_install = false,
     highlight = { enable = true },
     endwise = { enable = true },
+    context = {
+      enable = true,
+      multiwindow = true,
+    },
   },
 }
