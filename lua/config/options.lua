@@ -46,3 +46,7 @@ vim.o.winborder = 'rounded'
 
 -- session
 vim.o.sessionoptions = 'buffers,curdir,folds,help,tabpages,winsize,terminal,options,globals'
+
+-- configure searching path && ignore specify directory
+vim.opt.path:append(vim.fn.getcwd() .. '/**')
+vim.opt.wildignore:append { '*/.git/*', '*/node_modules/*' }
