@@ -54,7 +54,7 @@ return {
       }
       cmp.setup(opts)
     end,
-    enabled = false,
+    enabled = true,
   },
   { "hrsh7th/cmp-nvim-lsp", lazy = true },
   { "hrsh7th/cmp-path",     lazy = true },

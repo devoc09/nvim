@@ -5,6 +5,6 @@ return {
     -- config = function(opts)
     --   require('snippy').setup(opts)
     -- end
-    enabled = false,
+    enabled = true,
   },
 }

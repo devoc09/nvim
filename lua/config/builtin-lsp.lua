@@ -173,7 +173,21 @@ vim.lsp.config['copilot'] = {
   end,
 }
 
-vim.lsp.enable({ 'gopls', 'lua_ls', 'tsgo', 'rust_analyzer' })
+---@type vim.lsp.Config
+vim.lsp.config['zls'] = {
+  cmd = { 'zls' },
+  root_markers = {
+    '.git',
+    'zls.json',
+    'build.zig',
+  },
+  filetypes = {
+    'zig',
+    'zir',
+  },
+}
+
+vim.lsp.enable({ 'gopls', 'lua_ls', 'tsgo', 'rust_analyzer', 'zls' })
 
 -- Keymaps of LSP
 vim.api.nvim_create_autocmd('LspAttach', {
