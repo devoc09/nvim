@@ -1,13 +1,10 @@
 -- Split window
-vim.api.nvim_set_keymap("n", "ss", ":split<Return><C-w>w", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "sv", ":vsplit<Return>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "st",
-  ":let relpath = fnamemodify(expand('%:p'), ':.') | execute 'tabnew ' . relpath<Return>",
-  { noremap = true, silent = true })
+-- TODO: if not needed, delete this keymap
+-- vim.api.nvim_set_keymap("n", "st",
+--   ":let relpath = fnamemodify(expand('%:p'), ':.') | execute 'tabnew ' . relpath<Return>",
+--   { noremap = true, silent = true })
 
 -- Remap keys
-vim.api.nvim_set_keymap("n", "<S-h>", "^", { noremap = true })
-vim.api.nvim_set_keymap("n", "<S-l>", "$", { noremap = true })
 vim.api.nvim_set_keymap("n", "<Left>", "<C-w><<CR>", { noremap = true })
 vim.api.nvim_set_keymap("n", "<Right>", "<C-w>><CR>", { noremap = true })
 vim.api.nvim_set_keymap("n", "<Up>", "<C-w>+<CR>", { noremap = true })
@@ -18,10 +15,11 @@ vim.api.nvim_set_keymap("n", "<ScrollWheelUp>", "<C-Y>", { noremap = true })
 vim.api.nvim_set_keymap("n", "<ScrollWheelDown>", "<C-E>", { noremap = true })
 
 -- Move windows
-vim.api.nvim_set_keymap("n", "sh", "<C-w>h", { noremap = true })
-vim.api.nvim_set_keymap("n", "sk", "<C-w>k", { noremap = true })
-vim.api.nvim_set_keymap("n", "sj", "<C-w>j", { noremap = true })
-vim.api.nvim_set_keymap("n", "sl", "<C-w>l", { noremap = true })
+-- TODO: if not needed, delete this keymap
+-- vim.api.nvim_set_keymap("n", "sh", "<C-w>h", { noremap = true })
+-- vim.api.nvim_set_keymap("n", "sk", "<C-w>k", { noremap = true })
+-- vim.api.nvim_set_keymap("n", "sj", "<C-w>j", { noremap = true })
+-- vim.api.nvim_set_keymap("n", "sl", "<C-w>l", { noremap = true })
 vim.api.nvim_set_keymap("n", "<S-i>", "<C-i>", { noremap = true })
 
 -- Switch tabs
