@@ -1,0 +1,82 @@
+{
+  "plugins": {
+    "cmp-buffer": {
+      "rev": "b74fab3",
+      "src": "https://github.com/hrsh7th/cmp-buffer"
+    },
+    "cmp-nvim-lsp": {
+      "rev": "bd5a7d6",
+      "src": "https://github.com/hrsh7th/cmp-nvim-lsp"
+    },
+    "cmp-path": {
+      "rev": "c642487",
+      "src": "https://github.com/hrsh7th/cmp-path"
+    },
+    "cmp-snippy": {
+      "rev": "6e39210",
+      "src": "https://github.com/dcampos/cmp-snippy"
+    },
+    "fzf-lua": {
+      "rev": "996b236",
+      "src": "https://github.com/ibhagwan/fzf-lua"
+    },
+    "gitsigns.nvim": {
+      "rev": "20ad441",
+      "src": "https://github.com/lewis6991/gitsigns.nvim"
+    },
+    "hop.nvim": {
+      "rev": "90db1b2",
+      "src": "https://github.com/phaazon/hop.nvim",
+      "version": "'v2'"
+    },
+    "nvim-cmp": {
+      "rev": "106c4bc",
+      "src": "https://github.com/hrsh7th/nvim-cmp"
+    },
+    "nvim-colorizer.lua": {
+      "rev": "a065833",
+      "src": "https://github.com/norcalli/nvim-colorizer.lua"
+    },
+    "nvim-lspconfig": {
+      "rev": "2010fc6",
+      "src": "https://github.com/neovim/nvim-lspconfig"
+    },
+    "nvim-snippy": {
+      "rev": "504ab14",
+      "src": "https://github.com/dcampos/nvim-snippy"
+    },
+    "nvim-treesitter": {
+      "rev": "42fc28ba",
+      "src": "https://github.com/nvim-treesitter/nvim-treesitter",
+      "version": "'master'"
+    },
+    "nvim-treesitter-context": {
+      "rev": "660861b",
+      "src": "https://github.com/nvim-treesitter/nvim-treesitter-context"
+    },
+    "nvim-ts-autotag": {
+      "rev": "c4ca798",
+      "src": "https://github.com/windwp/nvim-ts-autotag"
+    },
+    "nvim-web-devicons": {
+      "rev": "8dcb311",
+      "src": "https://github.com/nvim-tree/nvim-web-devicons"
+    },
+    "session-manager.nvim": {
+      "rev": "5668b63",
+      "src": "https://github.com/devoc09/session-manager.nvim"
+    },
+    "snacks.nvim": {
+      "rev": "dec29f5",
+      "src": "https://github.com/folke/snacks.nvim"
+    },
+    "sphere.vim": {
+      "rev": "1f7e7ea",
+      "src": "https://github.com/devoc09/sphere.vim"
+    },
+    "zig.vim": {
+      "rev": "0c10086",
+      "src": "https://github.com/ziglang/zig.vim"
+    }
+  }
+}
