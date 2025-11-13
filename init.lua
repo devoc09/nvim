@@ -174,6 +174,9 @@ vim.o.sessionoptions = 'buffers,curdir,folds,help,tabpages,winsize,terminal,opti
 vim.opt.path:append(vim.fn.getcwd() .. '/**')
 vim.opt.wildignore:append { '*/.git/*', '*/node_modules/*' }
 
+-- configure netrw
+vim.g.netrw_liststyle = 3 -- default listing style as treeview
+
 ---------------------------------------------------------------------------------
 -- manage plugins by vim.pack
 -- concept:
