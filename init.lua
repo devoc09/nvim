@@ -215,6 +215,7 @@ vim.pack.add({
   -- { src = 'https://github.com/devoc09/session-manager.nvim' }, TODO: there is a bug when load by vim.pack.add. unload plugins when session auto load
   { src = 'https://github.com/folke/snacks.nvim' },
   { src = 'https://github.com/ziglang/zig.vim' },
+  { src = 'https://github.com/terrastruct/d2-vim' },
   { src = 'https://github.com/dcampos/nvim-snippy' },
   { src = 'https://github.com/hrsh7th/nvim-cmp' },
   { src = 'https://github.com/hrsh7th/cmp-nvim-lsp' },

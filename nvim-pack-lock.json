@@ -16,6 +16,10 @@
       "rev": "6e39210",
       "src": "https://github.com/dcampos/cmp-snippy"
     },
+    "d2-vim": {
+      "rev": "cb3eb7f",
+      "src": "https://github.com/terrastruct/d2-vim"
+    },
     "fzf-lua": {
       "rev": "996b236",
       "src": "https://github.com/ibhagwan/fzf-lua"
