@@ -78,6 +78,10 @@
       "rev": "1f7e7ea",
       "src": "https://github.com/devoc09/sphere.vim"
     },
+    "vim-delve": {
+      "rev": "41d6ad2",
+      "src": "https://github.com/sebdah/vim-delve"
+    },
     "zig.vim": {
       "rev": "0c10086",
       "src": "https://github.com/ziglang/zig.vim"

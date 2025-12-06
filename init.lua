@@ -85,8 +85,6 @@ vim.api.nvim_set_keymap('n', '<C-k>', ':cprev<CR>', { noremap = true, silent = t
 vim.api.nvim_set_keymap('n', '<C-c>', ':cclose<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', ';c', ':let @+=expand("%:p")<CR>', { noremap = true, silent = true }) -- copy filepath of buffer
 
--- Set cmdheight
-
 -- Use Terminal shortcut
 vim.cmd([[
   autocmd TermOpen * startinsert
@@ -149,10 +147,10 @@ vim.o.hlsearch = true   -- Highlight search results
 -- window split config
 vim.o.splitright = true
 
--- statusline & tabline
+-- statusline & tabline & cmdheight
 vim.o.showtabline = 1
-vim.o.laststatus = 3
-vim.o.cmdheight = 1
+vim.o.laststatus = 0
+vim.o.cmdheight = 0
 
 -- colorscheme
 vim.opt.background = 'dark'
@@ -215,6 +213,7 @@ vim.pack.add({
   -- { src = 'https://github.com/devoc09/session-manager.nvim' }, TODO: there is a bug when load by vim.pack.add. unload plugins when session auto load
   { src = 'https://github.com/folke/snacks.nvim' },
   { src = 'https://github.com/ziglang/zig.vim' },
+  { src = 'https://github.com/sebdah/vim-delve' },
   { src = 'https://github.com/terrastruct/d2-vim' },
   { src = 'https://github.com/dcampos/nvim-snippy' },
   { src = 'https://github.com/hrsh7th/nvim-cmp' },
@@ -406,3 +405,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
 vim.diagnostic.config({
   virtual_lines = true,
 })
+
+---------------------------------------------------------------------------------
+-- delve
+---------------------------------------------------------------------------------
+vim.keymap.set("n", "<leader>db", "<cmd>DlvToggleBreakpoint<cr>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>dd", "<cmd>DlvDebug<cr>", { noremap = true, silent = true })
