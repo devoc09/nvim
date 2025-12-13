@@ -66,6 +66,14 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
+vim.filetype.add({
+  pattern = {
+    ['.*%.network'] = 'systemd',
+    ['.*%.netdev'] = 'systemd',
+    ['.*%.link'] = 'systemd',
+  },
+})
+
 ---------------------------------------------------------------------------------
 -- define keymaps
 ---------------------------------------------------------------------------------
