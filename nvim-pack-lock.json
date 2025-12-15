@@ -5,7 +5,7 @@
       "src": "https://github.com/hrsh7th/cmp-buffer"
     },
     "cmp-nvim-lsp": {
-      "rev": "bd5a7d6",
+      "rev": "cbc7b02",
       "src": "https://github.com/hrsh7th/cmp-nvim-lsp"
     },
     "cmp-path": {
@@ -21,11 +21,11 @@
       "src": "https://github.com/terrastruct/d2-vim"
     },
     "fzf-lua": {
-      "rev": "996b236",
+      "rev": "e9c8828",
       "src": "https://github.com/ibhagwan/fzf-lua"
     },
     "gitsigns.nvim": {
-      "rev": "20ad441",
+      "rev": "5813e48",
       "src": "https://github.com/lewis6991/gitsigns.nvim"
     },
     "hop.nvim": {
@@ -34,7 +34,7 @@
       "version": "'v2'"
     },
     "nvim-cmp": {
-      "rev": "106c4bc",
+      "rev": "d97d85e",
       "src": "https://github.com/hrsh7th/nvim-cmp"
     },
     "nvim-colorizer.lua": {
@@ -42,7 +42,7 @@
       "src": "https://github.com/norcalli/nvim-colorizer.lua"
     },
     "nvim-lspconfig": {
-      "rev": "2010fc6",
+      "rev": "f397966",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-snippy": {
@@ -55,7 +55,7 @@
       "version": "'master'"
     },
     "nvim-treesitter-context": {
-      "rev": "660861b",
+      "rev": "64dd4cf",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter-context"
     },
     "nvim-ts-autotag": {
@@ -67,11 +67,11 @@
       "src": "https://github.com/nvim-tree/nvim-web-devicons"
     },
     "session-manager.nvim": {
-      "rev": "5668b63",
+      "rev": "d76cfe8",
       "src": "https://github.com/devoc09/session-manager.nvim"
     },
     "snacks.nvim": {
-      "rev": "dec29f5",
+      "rev": "fe7cfe9",
       "src": "https://github.com/folke/snacks.nvim"
     },
     "sphere.vim": {
@@ -83,7 +83,7 @@
       "src": "https://github.com/sebdah/vim-delve"
     },
     "zig.vim": {
-      "rev": "0c10086",
+      "rev": "1a1112e",
       "src": "https://github.com/ziglang/zig.vim"
     }
   }

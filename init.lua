@@ -218,7 +218,7 @@ vim.pack.add({
   { src = 'https://github.com/nvim-treesitter/nvim-treesitter-context' },
   { src = 'https://github.com/windwp/nvim-ts-autotag' },
   { src = 'https://github.com/phaazon/hop.nvim',                       version = 'v2' },
-  -- { src = 'https://github.com/devoc09/session-manager.nvim' }, TODO: there is a bug when load by vim.pack.add. unload plugins when session auto load
+  { src = 'https://github.com/devoc09/session-manager.nvim' }, -- TODO: there is a bug when load by vim.pack.add. unload plugins when session auto load
   { src = 'https://github.com/folke/snacks.nvim' },
   { src = 'https://github.com/ziglang/zig.vim' },
   { src = 'https://github.com/sebdah/vim-delve' },
@@ -230,6 +230,12 @@ vim.pack.add({
   { src = 'https://github.com/hrsh7th/cmp-buffer' },
   { src = 'https://github.com/dcampos/cmp-snippy' },
   { src = 'https://github.com/neovim/nvim-lspconfig' },
+})
+
+-- configure session-manager.nvim
+require('session-manager').setup({
+  options = { 'buffers', 'curdir', 'tabpages', 'winsize' },
+  auto_load = true,
 })
 
 -- configure treesitter
