@@ -26,7 +26,7 @@ vim.api.nvim_create_autocmd('FileType', {
 -- define filetypes
 ---------------------------------------------------------------------------------
 vim.api.nvim_create_autocmd('FileType', {
-  pattern = { 'go', 'python', 'zig' },
+  pattern = { 'go', 'python', 'zig', 'haskell', 'lhaskell', 'cabal' },
   callback = function()
     vim.opt_local.autoindent = true
     vim.opt_local.smartindent = true
@@ -271,6 +271,14 @@ vim.cmd('colorscheme sphere')
 
 -- configure fzf-lua
 local fzflua = require('fzf-lua')
+fzflua.setup({
+  files = {
+    fd_opts = "--color=never --type f --hidden --follow --exclude .git",
+  },
+  grep = {
+    rg_opts = "--column --line-number --no-heading --color=always --smart-case --hidden --glob '!.git/' -e",
+  },
+})
 vim.keymap.set('n', '<C-g>', function() fzflua.files() end)
 vim.keymap.set('n', '<C-p>', function() fzflua.grep() end)
 
@@ -359,6 +367,7 @@ vim.lsp.config['lua_ls'] = {
 
 vim.lsp.enable({
   'gopls',
+  'hls',
   'lua_ls',
   'tsgo',
   'rust_analyzer',
