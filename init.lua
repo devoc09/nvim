@@ -26,7 +26,7 @@ vim.api.nvim_create_autocmd('FileType', {
 -- define filetypes
 ---------------------------------------------------------------------------------
 vim.api.nvim_create_autocmd('FileType', {
-  pattern = { 'go', 'python', 'zig', 'haskell', 'lhaskell', 'cabal' },
+  pattern = { 'go', 'python', 'zig' },
   callback = function()
     vim.opt_local.autoindent = true
     vim.opt_local.smartindent = true
@@ -38,7 +38,7 @@ vim.api.nvim_create_autocmd('FileType', {
 })
 
 vim.api.nvim_create_autocmd('FileType', {
-  pattern = { 'c', 'vim', 'lua', 'bash', 'fish' },
+  pattern = { 'c', 'vim', 'lua', 'bash', 'fish', 'haskell', 'lhaskell', 'cabal' },
   callback = function()
     vim.opt_local.autoindent = true
     vim.opt_local.smartindent = true
