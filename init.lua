@@ -230,6 +230,7 @@ vim.pack.add({
   { src = 'https://github.com/hrsh7th/cmp-buffer' },
   { src = 'https://github.com/dcampos/cmp-snippy' },
   { src = 'https://github.com/neovim/nvim-lspconfig' },
+  { src = 'https://github.com/sourcegraph/amp.nvim' },
 })
 
 -- configure session-manager.nvim
@@ -434,3 +435,8 @@ vim.diagnostic.config({
 ---------------------------------------------------------------------------------
 vim.keymap.set("n", "<leader>db", "<cmd>DlvToggleBreakpoint<cr>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>dd", "<cmd>DlvDebug<cr>", { noremap = true, silent = true })
+
+---------------------------------------------------------------------------------
+-- Amp CLI
+---------------------------------------------------------------------------------
+require('amp').setup({ auto_start = true, log_level = "info" })
