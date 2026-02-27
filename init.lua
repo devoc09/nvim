@@ -367,12 +367,13 @@ vim.lsp.config['lua_ls'] = {
 }
 
 vim.lsp.enable({
-  'gopls',
+  'gopls',         -- go
   'hls',
-  'lua_ls',
-  'tsgo',
-  'rust_analyzer',
-  'zls'
+  'lua_ls',        -- lua
+  'tsgo',          -- typescript
+  'ty',            -- python
+  'rust_analyzer', --rust
+  'zls'            -- zig
 })
 
 -- Keymaps of LSP
