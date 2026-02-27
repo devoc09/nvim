@@ -231,6 +231,7 @@ vim.pack.add({
   { src = 'https://github.com/dcampos/cmp-snippy' },
   { src = 'https://github.com/neovim/nvim-lspconfig' },
   { src = 'https://github.com/sourcegraph/amp.nvim' },
+  { src = 'https://github.com/folke/sidekick.nvim' },
 })
 
 -- configure session-manager.nvim
@@ -441,3 +442,21 @@ vim.keymap.set("n", "<leader>dd", "<cmd>DlvDebug<cr>", { noremap = true, silent 
 -- Amp CLI
 ---------------------------------------------------------------------------------
 require('amp').setup({ auto_start = true, log_level = "info" })
+
+---------------------------------------------------------------------------------
+-- sidekick
+---------------------------------------------------------------------------------
+local sidekick = require('sidekick')
+sidekick.setup({
+  cli = {
+    mux = { enabled = false },
+    win = {
+      layout = 'right',
+      split = {
+        width = 0.4,
+      },
+    },
+  },
+})
+vim.keymap.set({ 'n', 't', 'i', 'x' }, ';cc', function() require('sidekick.cli').toggle({ name = 'claude' }) end,
+  { desc = 'Sidekick Toggle CLI' })

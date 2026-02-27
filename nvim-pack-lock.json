@@ -74,6 +74,10 @@
       "rev": "d76cfe8",
       "src": "https://github.com/devoc09/session-manager.nvim"
     },
+    "sidekick.nvim": {
+      "rev": "c2bdf8c",
+      "src": "https://github.com/folke/sidekick.nvim"
+    },
     "snacks.nvim": {
       "rev": "fe7cfe9",
       "src": "https://github.com/folke/snacks.nvim"
