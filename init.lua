@@ -91,7 +91,7 @@ vim.api.nvim_set_keymap('n', '<Tab>', 'gt', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<C-j>', ':cnext<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<C-k>', ':cprev<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<C-c>', ':cclose<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', ';c', ':let @+=expand("%:p")<CR>', { noremap = true, silent = true }) -- copy filepath of buffer
+vim.api.nvim_set_keymap('n', ';cp', ':let @+=expand("%:p")<CR>', { noremap = true, silent = true }) -- copy filepath of buffer
 
 -- Use Terminal shortcut
 vim.cmd([[
