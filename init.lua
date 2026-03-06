@@ -388,16 +388,28 @@ vim.api.nvim_create_autocmd('LspAttach', {
     local client = assert(vim.lsp.get_client_by_id(ev.data.client_id))
     local keyopts = { remap = true, silent = true }
     if client:supports_method('textDocument/implementation') then
-      vim.keymap.set('n', 'gD', vim.lsp.buf.implementation, keyopts)
+      vim.keymap.set('n', 'gD', function()
+        vim.cmd('tab split')
+        vim.lsp.buf.implementation()
+      end, keyopts)
     end
     if client:supports_method('textDocument/definition') then
-      vim.keymap.set('n', 'gd', vim.lsp.buf.definition, keyopts)
+      vim.keymap.set('n', 'gd', function()
+        vim.cmd('tab split')
+        vim.lsp.buf.definition()
+      end, keyopts)
     end
     if client:supports_method('textDocument/typeDefinition') then
-      vim.keymap.set('n', 'gt', vim.lsp.buf.type_definition, keyopts)
+      vim.keymap.set('n', 'gt', function()
+        vim.cmd('tab split')
+        vim.lsp.buf.type_definition()
+      end, keyopts)
     end
     if client:supports_method('textDocument/references') then
-      vim.keymap.set('n', 'gr', vim.lsp.buf.references, keyopts)
+      vim.keymap.set('n', 'gr', function()
+        vim.cmd('tab split')
+        vim.lsp.buf.references()
+      end, keyopts)
     end
     if client:supports_method('textDocument/rename') then
       vim.keymap.set('n', 'gn', vim.lsp.buf.rename, keyopts)
