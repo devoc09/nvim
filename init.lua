@@ -450,6 +450,40 @@ vim.keymap.set("n", "<leader>db", "<cmd>DlvToggleBreakpoint<cr>", { noremap = tr
 vim.keymap.set("n", "<leader>dd", "<cmd>DlvDebug<cr>", { noremap = true, silent = true })
 
 ---------------------------------------------------------------------------------
+-- Generate commit message with Claude CLI
+---------------------------------------------------------------------------------
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'gitcommit',
+  callback = function()
+    vim.keymap.set('n', '<Leader>cm', function()
+      local diff = vim.fn.system('git diff --cached')
+      if vim.v.shell_error ~= 0 or diff == '' then
+        vim.notify('No staged changes found', vim.log.levels.WARN)
+        return
+      end
+      local bufnr = vim.api.nvim_get_current_buf()
+      local prompt = 'Generate a concise conventional commit message (type: subject, no body) for the following diff. Output ONLY the commit message as plain text, no markdown, no backticks, no code blocks.\n\n' .. diff
+      vim.notify('Generating commit message...')
+      vim.system(
+        { 'claude', '-p', '--no-session-persistence', '--model', 'sonnet', '--effort', 'low', prompt },
+        { text = true },
+        function(obj)
+          vim.schedule(function()
+            if obj.code ~= 0 then
+              vim.notify('Failed to generate commit message', vim.log.levels.ERROR)
+              return
+            end
+            local lines = vim.split(vim.trim(obj.stdout), '\n')
+            vim.api.nvim_buf_set_lines(bufnr, 0, 0, false, lines)
+            vim.notify('Commit message generated')
+          end)
+        end
+      )
+    end, { buffer = true, desc = 'Generate commit message with Claude' })
+  end,
+})
+
+---------------------------------------------------------------------------------
 -- Amp CLI
 ---------------------------------------------------------------------------------
 require('amp').setup({ auto_start = true, log_level = "info" })
