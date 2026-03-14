@@ -462,10 +462,12 @@ vim.api.nvim_create_autocmd('FileType', {
         return
       end
       local bufnr = vim.api.nvim_get_current_buf()
-      local prompt = 'Generate a concise conventional commit message (type: subject, no body) for the following diff. Output ONLY the commit message as plain text, no markdown, no backticks, no code blocks.\n\n' .. diff
+      local prompt =
+          'Generate a concise conventional commit message (type: subject, no body) for the following diff. Output ONLY the commit message as plain text, no markdown, no backticks, no code blocks.\n\n' ..
+          diff
       vim.notify('Generating commit message...')
       vim.system(
-        { 'claude', '-p', '--no-session-persistence', '--model', 'sonnet', '--effort', 'low', prompt },
+        { 'claude', '-p', '--no-session-persistence', '--model', 'haiku', '--effort', 'low', prompt },
         { text = true },
         function(obj)
           vim.schedule(function()
