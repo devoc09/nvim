@@ -171,6 +171,9 @@ vim.o.cursorline = true
 
 -- buffer
 vim.o.autoread = true
+vim.api.nvim_create_autocmd({ 'FocusGained', 'BufEnter', 'CursorHold' }, {
+  command = 'checktime',
+})
 vim.o.winborder = 'rounded'
 
 -- session
