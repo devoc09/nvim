@@ -284,7 +284,7 @@ fzflua.setup({
   },
 })
 vim.keymap.set('n', '<C-g>', function() fzflua.files() end)
-vim.keymap.set('n', '<C-p>', function() fzflua.grep() end)
+vim.keymap.set('n', '<C-p>', function() fzflua.live_grep_native() end)
 
 -- configure hop.nvim
 local hop = require('hop')
