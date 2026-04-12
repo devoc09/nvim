@@ -111,7 +111,7 @@ vim.cmd([[
 ]])
 
 -- Clear all buffers
-function clearBuffers()
+function ClearBuffers()
   local buffers = vim.api.nvim_list_bufs()
 
   for _, buffer in ipairs(buffers) do
@@ -123,7 +123,7 @@ function clearBuffers()
   end
 end
 
-vim.api.nvim_set_keymap('n', '<Leader>cl', ':lua clearBuffers()<cr>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Leader>cl', ':lua ClearBuffers()<cr>', { noremap = true, silent = true })
 
 ---------------------------------------------------------------------------------
 -- options
@@ -217,7 +217,6 @@ vim.pack.add({
   { src = 'https://github.com/nvim-tree/nvim-web-devicons' },
   { src = 'https://github.com/ibhagwan/fzf-lua' },
   { src = 'https://github.com/lewis6991/gitsigns.nvim' },
-  { src = 'https://github.com/nvim-treesitter/nvim-treesitter',        version = 'master' },
   { src = 'https://github.com/nvim-treesitter/nvim-treesitter-context' },
   { src = 'https://github.com/windwp/nvim-ts-autotag' },
   { src = 'https://github.com/phaazon/hop.nvim',                       version = 'v2' },
@@ -243,21 +242,16 @@ require('session-manager').setup({
 })
 
 -- configure treesitter
-local treesitter = require('nvim-treesitter.configs')
-treesitter.setup({
-  ensure_installed = { 'c', 'lua', 'vim', 'vimdoc', 'query', 'markdown', 'markdown_inline', 'go', 'rust', 'zig', 'typescript' },
-  ignore_install = { 'javascript' },
-  sync_install = false,
-  auto_install = false,
-  highlight = { enable = true },
-  textobjects = { enable = true },
-  context = {
-    enable = true,
-    multiwindow = true,
-  },
-  indent = {
-    enable = true,
-  },
+vim.api.nvim_create_autocmd('FileType', {
+  callback = function(ev)
+    if pcall(vim.treesitter.start, ev.buf) then
+      vim.bo[ev.buf].indentexpr = "v:lua.vim.treesitter.indentexpr()"
+    end
+  end,
+})
+
+require('treesitter-context').setup({
+  multiwindow = true,
 })
 
 local ts_autotag = require('nvim-ts-autotag')
@@ -375,7 +369,7 @@ vim.lsp.enable({
   'lua_ls',        -- lua
   'tsgo',          -- typescript
   'ty',            -- python
-  'rust_analyzer', --rust
+  'rust_analyzer', -- rust
   'zls'            -- zig
 })
 
