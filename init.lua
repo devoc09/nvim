@@ -220,7 +220,7 @@ vim.pack.add({
   { src = 'https://github.com/nvim-treesitter/nvim-treesitter-context' },
   { src = 'https://github.com/windwp/nvim-ts-autotag' },
   { src = 'https://github.com/phaazon/hop.nvim',                       version = 'v2' },
-  { src = 'https://github.com/devoc09/session-manager.nvim' }, -- TODO: there is a bug when load by vim.pack.add. unload plugins when session auto load
+  { src = 'https://github.com/devoc09/session-manager.nvim' },
   { src = 'https://github.com/folke/snacks.nvim' },
   { src = 'https://github.com/ziglang/zig.vim' },
   { src = 'https://github.com/sebdah/vim-delve' },
@@ -233,6 +233,8 @@ vim.pack.add({
   { src = 'https://github.com/dcampos/cmp-snippy' },
   { src = 'https://github.com/neovim/nvim-lspconfig' },
   { src = 'https://github.com/sourcegraph/amp.nvim' },
+  { src = 'https://github.com/tpope/vim-fugitive' },
+  { src = 'https://github.com/justinmk/vim-ug' },
 })
 
 -- configure session-manager.nvim
@@ -277,8 +279,8 @@ fzflua.setup({
     rg_opts = "--column --line-number --no-heading --color=always --smart-case --hidden --glob '!.git/' -e",
   },
 })
-vim.keymap.set('n', '<C-g>', function() fzflua.files() end)
-vim.keymap.set('n', '<C-p>', function() fzflua.live_grep_native() end)
+vim.keymap.set('n', '<C-f>', function() fzflua.files() end)
+vim.keymap.set('n', '<C-l>', function() fzflua.live_grep_native() end)
 
 -- configure hop.nvim
 local hop = require('hop')
