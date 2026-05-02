@@ -134,7 +134,10 @@ vim.o.fileencoding = 'utf-8'
 vim.o.mouse = 'a'
 vim.o.foldenable = false
 vim.o.wildmenu = true
-vim.o.completeopt = 'menu,menuone,noinsert,noselect,popup'
+vim.o.pumborder = 'rounded'
+vim.o.winborder = 'rounded'
+vim.o.completeopt = 'menu,menuone,noinsert,noselect,popup,fuzzy'
+vim.opt.autocomplete = true
 vim.o.belloff = 'all'
 vim.o.number = true
 vim.o.scrolloff = 999 -- Keep the cursor centered in the screen
@@ -174,7 +177,6 @@ vim.o.autoread = true
 vim.api.nvim_create_autocmd({ 'FocusGained', 'BufEnter', 'CursorHold' }, {
   command = 'checktime',
 })
-vim.o.winborder = 'rounded'
 
 -- session
 vim.o.sessionoptions = 'buffers,curdir,folds,help,tabpages,winsize,terminal,options,globals'
@@ -217,52 +219,28 @@ vim.pack.add({
   { src = 'https://github.com/nvim-tree/nvim-web-devicons' },
   { src = 'https://github.com/ibhagwan/fzf-lua' },
   { src = 'https://github.com/lewis6991/gitsigns.nvim' },
-  { src = 'https://github.com/nvim-treesitter/nvim-treesitter-context' },
-  { src = 'https://github.com/windwp/nvim-ts-autotag' },
-  { src = 'https://github.com/phaazon/hop.nvim',                       version = 'v2' },
   { src = 'https://github.com/devoc09/session-manager.nvim' },
   { src = 'https://github.com/folke/snacks.nvim' },
   { src = 'https://github.com/ziglang/zig.vim' },
   { src = 'https://github.com/sebdah/vim-delve' },
   { src = 'https://github.com/terrastruct/d2-vim' },
-  { src = 'https://github.com/dcampos/nvim-snippy' },
-  { src = 'https://github.com/hrsh7th/nvim-cmp' },
-  { src = 'https://github.com/hrsh7th/cmp-nvim-lsp' },
-  { src = 'https://github.com/hrsh7th/cmp-path' },
-  { src = 'https://github.com/hrsh7th/cmp-buffer' },
-  { src = 'https://github.com/dcampos/cmp-snippy' },
   { src = 'https://github.com/neovim/nvim-lspconfig' },
-  { src = 'https://github.com/sourcegraph/amp.nvim' },
   { src = 'https://github.com/tpope/vim-fugitive' },
   { src = 'https://github.com/justinmk/vim-ug' },
 })
+
+vim.api.nvim_create_user_command('Packdel', function()
+  local inactive_packs = vim.iter(vim.pack.get())
+      :filter(function(x) return not x.active end)
+      :map(function(x) return x.spec.name end)
+      :totable()
+  vim.pack.del(inactive_packs)
+end, { desc = 'Delete inactive packages in vim.pack' })
 
 -- configure session-manager.nvim
 require('session-manager').setup({
   options = { 'buffers', 'curdir', 'tabpages', 'winsize' },
   auto_load = true,
-})
-
--- configure treesitter
-vim.api.nvim_create_autocmd('FileType', {
-  callback = function(ev)
-    if pcall(vim.treesitter.start, ev.buf) then
-      vim.bo[ev.buf].indentexpr = "v:lua.vim.treesitter.indentexpr()"
-    end
-  end,
-})
-
-require('treesitter-context').setup({
-  multiwindow = true,
-})
-
-local ts_autotag = require('nvim-ts-autotag')
-ts_autotag.setup({
-  opts = {
-    enable_close = true,
-    enable_rename = true,
-    enable_close_on_slash = true,
-  },
 })
 
 -- configure sphere.vim
@@ -282,62 +260,11 @@ fzflua.setup({
 vim.keymap.set('n', '<C-f>', function() fzflua.files() end)
 vim.keymap.set('n', '<C-l>', function() fzflua.live_grep_native() end)
 
--- configure hop.nvim
-local hop = require('hop')
-hop.setup({ multi_windows = true })
-vim.keymap.set('n', 'f', function() hop.hint_char1() end)
-
 -- configure snacks.nvim
 local snacks = require('snacks')
 snacks.setup({
   indent = { enabled = true },
 })
-
--- configure nvim-cmp
-local cmp = require('cmp')
-local snippy = require('snippy')
-local opts = {
-  preselect = 'item',
-  completion = {
-    completeopt = 'menu,menuone,noinsert',
-  },
-  sources = cmp.config.sources {
-    { name = 'nvim_lsp' },
-    { name = 'buffer' },
-    { name = 'path' },
-    { name = 'snippy' },
-  },
-  mapping = cmp.mapping.preset.insert({
-    ['<C-n>'] = cmp.mapping(function(original)
-      if snippy.can_jump(1) then
-        snippy.next()
-      elseif cmp.visible() then
-        cmp.select_next_item()
-      else
-        original()
-      end
-    end, { 'i', 's' }),
-    ['<C-p>'] = cmp.mapping(function(original)
-      if snippy.can_jump(-1) then
-        snippy.previous()
-      elseif cmp.visible() then
-        cmp.select_prev_item()
-      else
-        original()
-      end
-    end, { 'i', 's' }),
-  }),
-  snippet = {
-    expand = function(args)
-      require 'snippy'.expand_snippet(args.body)
-    end,
-  },
-  window = {
-    completion = cmp.config.window.bordered({ border = 'single' }),
-    documentation = cmp.config.window.bordered({ border = 'single' }),
-  },
-}
-cmp.setup(opts)
 
 ---------------------------------------------------------------------------------
 -- LSP settings
@@ -419,8 +346,22 @@ vim.api.nvim_create_autocmd('LspAttach', {
     if client:supports_method('textDocument/inlineCompletion') then
       vim.keymap.set('i', '<C-j>', vim.lsp.inline_completion.get, keyopts)
     end
+    if client:supports_method('textDocument/completion') then
+      local chars = {}; for i = 32, 126 do table.insert(chars, string.char(i)) end
+      client.server_capabilities.completionProvider.triggerCharacters = chars
+      vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
+    end
   end,
 })
+
+local original_compelete_set = vim.api.nvim__complete_set
+vim.api.nvim__complete_set = function(...)
+  local result = original_compelete_set(...)
+  if result and result.winid and vim.api.nvim_win_is_valid(result.winid) then
+    pcall(vim.api.nvim_winset_config, result.winid, { border = 'rounded' })
+  end
+  return result
+end
 
 -- Auto format on save
 vim.api.nvim_create_autocmd('LspAttach', {
@@ -483,8 +424,3 @@ vim.api.nvim_create_autocmd('FileType', {
     end, { buffer = true, desc = 'Generate commit message with Claude' })
   end,
 })
-
----------------------------------------------------------------------------------
--- Amp CLI
----------------------------------------------------------------------------------
-require('amp').setup({ auto_start = true, log_level = "info" })
