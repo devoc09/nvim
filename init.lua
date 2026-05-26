@@ -260,6 +260,43 @@ fzflua.setup({
 vim.keymap.set('n', '<C-f>', function() fzflua.files() end)
 vim.keymap.set('n', '<C-l>', function() fzflua.live_grep_native() end)
 
+-- Switch working directory using ghq + fzf-lua with session-manager integration
+vim.keymap.set('n', '<leader>w', function()
+  require('fzf-lua').fzf_exec('ghq list -p', {
+    prompt = 'GHQ Repos> ',
+    actions = {
+      ['default'] = function(selected)
+        local new_dir = selected[1]
+        if new_dir == vim.fn.getcwd() then
+          return
+        end
+
+        local sm = require('session-manager')
+
+        -- Save current session before switching
+        sm.save()
+
+        -- Close all buffers forcefully
+        vim.cmd('silent! %bd!')
+
+        -- Change working directory
+        vim.cmd('cd ' .. vim.fn.fnameescape(new_dir))
+
+        -- Update session-manager's current session pointer
+        sm.current = sm.get_current()
+
+        -- Restore session if it exists, otherwise just print directory change
+        if vim.fn.filereadable(sm.current) ~= 0 then
+          sm.load()
+          print('Restored session: ' .. new_dir)
+        else
+          print('Changed directory to: ' .. new_dir)
+        end
+      end,
+    },
+  })
+end, { noremap = true, silent = true })
+
 -- configure snacks.nvim
 local snacks = require('snacks')
 snacks.setup({
@@ -388,39 +425,3 @@ vim.diagnostic.config({
 ---------------------------------------------------------------------------------
 vim.keymap.set("n", "<leader>db", "<cmd>DlvToggleBreakpoint<cr>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>dd", "<cmd>DlvDebug<cr>", { noremap = true, silent = true })
-
----------------------------------------------------------------------------------
--- Generate commit message with Claude CLI
----------------------------------------------------------------------------------
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = 'gitcommit',
-  callback = function()
-    vim.keymap.set('n', '<Leader>cm', function()
-      local diff = vim.fn.system('git diff --cached')
-      if vim.v.shell_error ~= 0 or diff == '' then
-        vim.notify('No staged changes found', vim.log.levels.WARN)
-        return
-      end
-      local bufnr = vim.api.nvim_get_current_buf()
-      local prompt =
-          'Generate a concise conventional commit message (type: subject, no body) for the following diff. Output ONLY the commit message as plain text, no markdown, no backticks, no code blocks.\n\n' ..
-          diff
-      vim.notify('Generating commit message...')
-      vim.system(
-        { 'claude', '-p', '--no-session-persistence', '--model', 'haiku', '--effort', 'low', prompt },
-        { text = true },
-        function(obj)
-          vim.schedule(function()
-            if obj.code ~= 0 then
-              vim.notify('Failed to generate commit message', vim.log.levels.ERROR)
-              return
-            end
-            local lines = vim.split(vim.trim(obj.stdout), '\n')
-            vim.api.nvim_buf_set_lines(bufnr, 0, 0, false, lines)
-            vim.notify('Commit message generated')
-          end)
-        end
-      )
-    end, { buffer = true, desc = 'Generate commit message with Claude' })
-  end,
-})
