@@ -221,7 +221,7 @@ vim.pack.add({
   { src = 'https://github.com/lewis6991/gitsigns.nvim' },
   { src = 'https://github.com/devoc09/session-manager.nvim' },
   { src = 'https://github.com/folke/snacks.nvim' },
-  { src = 'https://github.com/ziglang/zig.vim' },
+  { src = 'https://codeberg.org/ziglang/zig.vim' },
   { src = 'https://github.com/sebdah/vim-delve' },
   { src = 'https://github.com/terrastruct/d2-vim' },
   { src = 'https://github.com/neovim/nvim-lspconfig' },
