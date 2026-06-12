@@ -113,14 +113,29 @@ vim.cmd([[
 -- Clear all buffers
 function ClearBuffers()
   local buffers = vim.api.nvim_list_bufs()
+  local unsaved = {}
+  local to_delete = {}
 
-  for _, buffer in ipairs(buffers) do
-    if vim.api.nvim_buf_get_option(buffer, 'modified') then
-      print('Buffer ' .. buffer .. 'has unsaved changes')
-    else
-      vim.api.nvim_buf_delete(buffer, { force = true })
+  for _, buf in ipairs(buffers) do
+    if vim.api.nvim_buf_is_valid(buf) and vim.bo[buf].buflisted then
+      if vim.bo[buf].modified then
+        table.insert(unsaved, buf)
+      else
+        table.insert(to_delete, buf)
+      end
     end
   end
+
+  if #unsaved > 0 then
+    local names = vim.iter(unsaved):map(function(b) return vim.api.nvim_buf_get_name(b) end):totable()
+    vim.notify('Keeping unsaved buffers:\n' .. table.concat(names, '\n'), vim.log.levels.WARN)
+  end
+
+  for _, buf in ipairs(to_delete) do
+    vim.api.nvim_buf_delete(buf, { force = true })
+  end
+
+  print('Closed ' .. #to_delete .. ' buffers, kept ' .. #unsaved .. ' unsaved')
 end
 
 vim.api.nvim_set_keymap('n', '<Leader>cl', ':lua ClearBuffers()<cr>', { noremap = true, silent = true })
@@ -390,16 +405,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end
   end,
 })
-
-local original_compelete_set = vim.api.nvim__complete_set
-vim.api.nvim__complete_set = function(...)
-  local result = original_compelete_set(...)
-  if result and result.winid and vim.api.nvim_win_is_valid(result.winid) then
-    pcall(vim.api.nvim_winset_config, result.winid, { border = 'rounded' })
-  end
-  return result
-end
-
 -- Auto format on save
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(ev)
