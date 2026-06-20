@@ -238,10 +238,11 @@ vim.pack.add({
   { src = 'https://github.com/folke/snacks.nvim' },
   { src = 'https://codeberg.org/ziglang/zig.vim' },
   { src = 'https://github.com/sebdah/vim-delve' },
-  { src = 'https://github.com/terrastruct/d2-vim' },
   { src = 'https://github.com/neovim/nvim-lspconfig' },
   { src = 'https://github.com/tpope/vim-fugitive' },
   { src = 'https://github.com/justinmk/vim-ug' },
+  { src = 'https://github.com/romus204/tree-sitter-manager.nvim' },
+  { src = 'https://github.com/nvim-treesitter/nvim-treesitter-context' },
 })
 
 vim.api.nvim_create_user_command('Packdel', function()
@@ -430,3 +431,18 @@ vim.diagnostic.config({
 ---------------------------------------------------------------------------------
 vim.keymap.set("n", "<leader>db", "<cmd>DlvToggleBreakpoint<cr>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>dd", "<cmd>DlvDebug<cr>", { noremap = true, silent = true })
+
+---------------------------------------------------------------------------------
+-- tree-sitter
+---------------------------------------------------------------------------------
+require('tree-sitter-manager').setup(
+  {
+    auto_install = true,                                                                      -- auto-install when a new filetype is encountered
+    noauto_install = { "c", "lua", "markdown", "markdown_inline", "query", "vim", "vimdoc" }, -- blacklist from auto_install
+    highlight = true,                                                                         -- enable treesitter highlighting (use list to whitelist)
+  }
+)
+
+require('treesitter-context').setup({
+  multiwindow = true,
+})
