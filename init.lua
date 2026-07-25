@@ -260,7 +260,7 @@ require('session-manager').setup({
 })
 
 -- configure sphere.vim
-vim.g.transparent_background = 1
+vim.g.transparent_background = 0
 vim.cmd('colorscheme sphere')
 
 -- configure fzf-lua
