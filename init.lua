@@ -231,7 +231,6 @@ end
 vim.pack.add({
   { src = 'https://github.com/norcalli/nvim-colorizer.lua' },
   { src = 'https://github.com/devoc09/sphere.vim' },
-  { src = 'https://github.com/nvim-tree/nvim-web-devicons' },
   { src = 'https://github.com/ibhagwan/fzf-lua' },
   { src = 'https://github.com/lewis6991/gitsigns.nvim' },
   { src = 'https://github.com/devoc09/session-manager.nvim' },
@@ -266,6 +265,11 @@ vim.cmd('colorscheme sphere')
 -- configure fzf-lua
 local fzflua = require('fzf-lua')
 fzflua.setup({
+  defaults = {
+    file_icons = false,
+    git_icons = false,
+    color_icons = false,
+  },
   files = {
     fd_opts = "--color=never --type f --hidden --follow --exclude .git",
   },
