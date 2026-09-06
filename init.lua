@@ -244,14 +244,6 @@ vim.pack.add({
   { src = 'https://github.com/nvim-treesitter/nvim-treesitter-context' },
 })
 
-vim.api.nvim_create_user_command('Packdel', function()
-  local inactive_packs = vim.iter(vim.pack.get())
-      :filter(function(x) return not x.active end)
-      :map(function(x) return x.spec.name end)
-      :totable()
-  vim.pack.del(inactive_packs)
-end, { desc = 'Delete inactive packages in vim.pack' })
-
 -- configure session-manager.nvim
 require('session-manager').setup({
   options = { 'buffers', 'curdir', 'tabpages', 'winsize' },
@@ -356,7 +348,8 @@ vim.lsp.enable({
   'tsgo',          -- typescript
   'ty',            -- python
   'rust_analyzer', -- rust
-  'zls'            -- zig
+  'zls',           -- zig
+  'sourcekit',     -- zig
 })
 
 -- Keymaps of LSP
