@@ -193,6 +193,20 @@ vim.api.nvim_create_autocmd({ 'FocusGained', 'BufEnter', 'CursorHold' }, {
   command = 'checktime',
 })
 
+-- reload buffer changed by external tools (e.g. Claude Code)
+vim.api.nvim_create_autocmd('FileChangedShell', {
+  callback = function(ev)
+    if vim.v.fcs_reason == 'deleted' then
+      return -- keep buffer as-is
+    end
+    if vim.bo[ev.buf].modified then
+      vim.v.fcs_choice = 'ask' -- native prompt: OK / Load File
+    else
+      vim.v.fcs_choice = 'reload' -- silent reload
+    end
+  end,
+})
+
 -- session
 vim.o.sessionoptions = 'buffers,curdir,folds,help,tabpages,winsize,terminal,options,globals'
 
@@ -242,6 +256,7 @@ vim.pack.add({
   { src = 'https://github.com/justinmk/vim-ug' },
   { src = 'https://github.com/romus204/tree-sitter-manager.nvim' },
   { src = 'https://github.com/nvim-treesitter/nvim-treesitter-context' },
+  { src = 'https://github.com/devoc09/zmxx' },
 })
 
 -- configure session-manager.nvim
@@ -342,14 +357,15 @@ vim.lsp.config['lua_ls'] = {
 }
 
 vim.lsp.enable({
+  'clangd',        -- c/c++
   'gopls',         -- go
-  'hls',
+  'hls',           -- haskell
   'lua_ls',        -- lua
   'tsgo',          -- typescript
   'ty',            -- python
   'rust_analyzer', -- rust
   'zls',           -- zig
-  'sourcekit',     -- zig
+  'sourcekit',     -- swift
 })
 
 -- Keymaps of LSP
