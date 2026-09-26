@@ -200,7 +200,7 @@ vim.api.nvim_create_autocmd('FileChangedShell', {
       return -- keep buffer as-is
     end
     if vim.bo[ev.buf].modified then
-      vim.v.fcs_choice = 'ask' -- native prompt: OK / Load File
+      vim.v.fcs_choice = 'ask'    -- native prompt: OK / Load File
     else
       vim.v.fcs_choice = 'reload' -- silent reload
     end
@@ -406,20 +406,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
       vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
     end
   end,
-})
--- Auto format on save
-vim.api.nvim_create_autocmd('LspAttach', {
-  callback = function(ev)
-    local client = assert(vim.lsp.get_client_by_id(ev.data.client_id))
-    if not client:supports_method('textDocument/willSaveWaitUntil') and client:supports_method('textDocument/formatting') then
-      vim.api.nvim_create_autocmd('BufWritePre', {
-        buffer = ev.buf,
-        callback = function()
-          vim.lsp.buf.format({ bufnr = ev.buf, id = client.id, timeout_ms = 1000, async = false })
-        end
-      })
-    end
-  end
 })
 
 -- Diagnostics
