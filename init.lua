@@ -12,6 +12,10 @@ vim.api.nvim_create_autocmd({ 'TermOpen' }, {
   pattern = '*',
   callback = function()
     vim.opt_local.number = false
+
+    -- In Terminal-Normal mode, send Enter / Ctrl-C to the terminal
+    vim.keymap.set('n', '<CR>', 'i<CR><C-\\><C-n>', { buffer = true, silent = true })
+    vim.keymap.set('n', '<C-c>', 'i<C-c><C-\\><C-n>', { buffer = true, silent = true })
   end
 })
 
@@ -74,14 +78,11 @@ vim.filetype.add({
   },
 })
 
----------------------------------------------------------------------------------
--- define keymaps
----------------------------------------------------------------------------------
 vim.api.nvim_set_keymap('n', '<Left>', '<C-w><<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<Right>', '<C-w>><CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<Up>', '<C-w>+<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<Down>', '<C-w>-<CR>', { noremap = true })
-vim.api.nvim_set_keymap('t', ';;', '<C-\\><C-n>', { noremap = true })
+vim.api.nvim_set_keymap('t', '<C-[>', '<C-\\><C-n>', { noremap = true })
 vim.g.mapleader = ' '
 vim.api.nvim_set_keymap('n', '<ScrollWheelUp>', '<C-Y>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<ScrollWheelDown>', '<C-E>', { noremap = true })
@@ -110,39 +111,6 @@ vim.cmd([[
   nmap <silent> tt :<C-u>silent call <SID>Openterm()<CR>
 ]])
 
--- Clear all buffers
-function ClearBuffers()
-  local buffers = vim.api.nvim_list_bufs()
-  local unsaved = {}
-  local to_delete = {}
-
-  for _, buf in ipairs(buffers) do
-    if vim.api.nvim_buf_is_valid(buf) and vim.bo[buf].buflisted then
-      if vim.bo[buf].modified then
-        table.insert(unsaved, buf)
-      else
-        table.insert(to_delete, buf)
-      end
-    end
-  end
-
-  if #unsaved > 0 then
-    local names = vim.iter(unsaved):map(function(b) return vim.api.nvim_buf_get_name(b) end):totable()
-    vim.notify('Keeping unsaved buffers:\n' .. table.concat(names, '\n'), vim.log.levels.WARN)
-  end
-
-  for _, buf in ipairs(to_delete) do
-    vim.api.nvim_buf_delete(buf, { force = true })
-  end
-
-  print('Closed ' .. #to_delete .. ' buffers, kept ' .. #unsaved .. ' unsaved')
-end
-
-vim.api.nvim_set_keymap('n', '<Leader>cl', ':lua ClearBuffers()<cr>', { noremap = true, silent = true })
-
----------------------------------------------------------------------------------
--- options
----------------------------------------------------------------------------------
 vim.o.encoding = 'utf-8'
 vim.o.fileformat = 'unix'
 vim.o.fileencoding = 'utf-8'
